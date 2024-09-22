@@ -23,4 +23,10 @@ FROM hw2.coach;
 SELECT BioID, TmID, Points, Attempts
 FROM hw2.player
 WHERE `points` > 2000
-ORDER BY `points` DESC
+ORDER BY `points` DESC, `BioID` ASC;
+
+-- EXERCISE 6
+SELECT *
+FROM hw2.person
+WHERE `BirthCountry,` IN ('GAB,', 'EGY,');
+
