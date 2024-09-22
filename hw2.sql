@@ -9,3 +9,8 @@ SELECT * FROM hw2.team;
 SELECT * 
 FROM hw2.team
 ORDER BY `TmID` ASC;
+
+-- EXERCISE 3
+SELECT * 
+FROM hw2.team
+WHERE `Name` LIKE 'MIL%W%K%';
