@@ -14,3 +14,8 @@ ORDER BY `TmID` ASC;
 SELECT * 
 FROM hw2.team
 WHERE `Name` LIKE 'MIL%W%K%';
+
+-- EXERCISE 4
+SELECT MIN(Games) AS LOWEST,MAX(Games) AS HIGHEST
+FROM hw2.coach;
+
