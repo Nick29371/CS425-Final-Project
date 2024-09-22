@@ -50,3 +50,7 @@ SELECT *
 FROM hw2.person
 WHERE (TRIM(`BirthCountry,`) IS NOT NULL AND TRIM(`BirthCountry,`) != ',' AND TRIM(`BirthCountry,`) != '') AND (`BirthCity` IS NULL OR TRIM(`BirthCity`) = '');
 
+-- EXERCISE 9
+SELECT BioID, Won AS MostGamesWon
+FROM hw2.coach
+WHERE Won = (SELECT MAX(Won) FROM hw2.coach);
