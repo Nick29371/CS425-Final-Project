@@ -19,9 +19,8 @@ WHERE `Name` LIKE 'MIL%W%K%';
 SELECT MIN(Games) AS LOWEST,MAX(Games) AS HIGHEST
 FROM hw2.coach;
 
-
-
-
-
-
-
+-- EXERCISE 5
+SELECT BioID, TmID, Points, Attempts
+FROM hw2.player
+WHERE `points` > 2000
+ORDER BY `points` DESC
