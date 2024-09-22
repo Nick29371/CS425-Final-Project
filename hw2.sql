@@ -54,3 +54,8 @@ WHERE (TRIM(`BirthCountry,`) IS NOT NULL AND TRIM(`BirthCountry,`) != ',' AND TR
 SELECT BioID, Won AS MostGamesWon
 FROM hw2.coach
 WHERE Won = (SELECT MAX(Won) FROM hw2.coach);
+
+-- EXERCISE 10
+SELECT concat(round((sum(CASE WHEN `points` = 0 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 4), '%') as NONSCORERS
+FROM hw2.player
+
