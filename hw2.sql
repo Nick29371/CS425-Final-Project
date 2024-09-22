@@ -1,5 +1,6 @@
 -- HOMEWORK 2
 -- EDILSON ALBERTO, BESNIK SHUAIPAJ, WILL MORRISSEY, HRIDETA RIMU
+
 -- EXERCISE 1
 SELECT * FROM hw2.coach;
 SELECT * FROM hw2.person;
@@ -43,3 +44,9 @@ JOIN
     hw2.coach c ON t.TmID = c.TmID
 WHERE 
     p.BioID = 'Jamesle01';
+
+-- EXERCISE 8
+SELECT *
+FROM hw2.person
+WHERE (TRIM(`BirthCountry,`) IS NOT NULL AND TRIM(`BirthCountry,`) != ',' AND TRIM(`BirthCountry,`) != '') AND (`BirthCity` IS NULL OR TRIM(`BirthCity`) = '');
+
