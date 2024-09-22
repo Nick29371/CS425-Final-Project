@@ -76,4 +76,26 @@ FROM hw2.person
 WHERE `BirthCountry,` is not NULL
 GROUP BY `BirthCountry,`;
 
--- 
+-- EXERCISE 14
+
+
+-- EXERCISE 15
+SELECT Ranking, AVG(Lost) as AVLOSSES
+FROM hw2.team
+WHERE ConfID = 'EC'
+GROUP BY `Ranking`;
+
+-- EXERCISE 16
+
+SELECT 'INVALID' AS ANYPROBLEMS
+FROM hw2.team
+WHERE Games != (Won + Lost)
+
+UNION ALL
+
+SELECT 'INVALID' AS ANYPROBLEMS
+FROM hw2.person
+WHERE `BirthCountry,` = ',';
+
+SELECT NULL AS ANYPROBLEMS
+WHERE NOT EXISTS (SELECT 1 FROM hw2.team WHERE Games != (Won + Lost)) AND NOT EXISTS (SELECT 1 FROM hw2.person WHERE BirthCountry = ',');
