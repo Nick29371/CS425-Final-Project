@@ -2,10 +2,11 @@
 -- EDILSON ALBERTO, BESNIK SHUAIPAJ, WILL MORRISSEY, HRIDETA RIMU
 
 -- EXERCISE 1
-SELECT * FROM hw2.coach;
-SELECT * FROM hw2.person;
-SELECT * FROM hw2.player;
-SELECT * FROM hw2.team;
+SELECT count(*) as LOADEDeachTime FROM hw2.coach;
+SELECT count(*) as LOADEDeachTime FROM hw2.person;
+SELECT count(*) as LOADEDeachTime FROM hw2.player;
+SELECT count(*) as LOADEDeachTime FROM hw2.team;
+
 -- EXERCISE 2
 SELECT * 
 FROM hw2.team
@@ -57,5 +58,22 @@ WHERE Won = (SELECT MAX(Won) FROM hw2.coach);
 
 -- EXERCISE 10
 SELECT concat(round((sum(CASE WHEN `points` = 0 THEN 1 ELSE 0 END) / COUNT(*)) * 100, 4), '%') as NONSCORERS
-FROM hw2.player
+FROM hw2.player;
 
+-- EXERCISE 11
+SELECT count(*) AS LOSERS
+FROM hw2.team
+WHERE `Lost` > `Won`;
+
+-- EXERCISE 12
+SELECT `confID`, COUNT(*) AS CONFSIZE
+FROM hw2.team
+GROUP BY `confID`;
+
+-- EXERCISE 13
+SELECT  `BirthCountry,`, COUNT(*) AS NUMLANDS
+FROM hw2.person
+WHERE `BirthCountry,` is not NULL
+GROUP BY `BirthCountry,`;
+
+-- 
