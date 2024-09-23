@@ -77,7 +77,19 @@ WHERE `BirthCountry,` is not NULL
 GROUP BY `BirthCountry,`;
 
 -- EXERCISE 14
-
+SELECT 
+    t1.Won,
+    t1.Lost,
+    LEAST(t1.Name, t2.Name) AS TEAM1,
+    GREATEST(t1.Name, t2.Name) AS TEAM2
+FROM 
+    hw2.team t1
+JOIN 
+    hw2.team t2 ON t1.Won = t2.Won 
+                AND t1.Lost = t2.Lost 
+                AND t1.Name <> t2.Name
+ORDER BY 
+    TEAM1, TEAM2;
 
 -- EXERCISE 15
 SELECT Ranking, AVG(Lost) as AVLOSSES
