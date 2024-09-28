@@ -258,11 +258,12 @@ INSERT INTO `Song_Review` (review_ID, rating, review_date, review_text, UID, SID
 (15, 5, '2024-03-20', 'An instant classic!', 15, 15);
 
 
--- index
+-- index to make looking up zipcodes faster
 CREATE INDEX index_zipcode
 ON User (zip_code);
 
 show index from user;
+
 -- temp table
 drop table most_influencial;
 CREATE TEMPORARY TABLE most_influencial AS
@@ -279,5 +280,62 @@ FROM user;
 
 select * from address_info;
 
+-- trigger to make sure that cost is never negative
 
+DELIMITER $$
+
+CREATE TRIGGER check_cost
+before insert ON subscription
+FOR EACH ROW
+BEGIN
+    IF new.cost < 0 THEN
+        SET new.cost = 0;
+    END IF;
+END$$
+
+DELIMITER ;
+
+INSERT INTO `Subscription` (subscription_ID, start_date, end_date, plan_type, cost) VALUES
+(16, '2023-01-01', '2024-01-01', 'Individual', -10);
+
+select * from subscription
+
+-- procedure to add a user
+
+DELIMITER $$
+
+CREATE PROCEDURE add_genre (
+	IN GID int,
+    IN genre_name VARCHAR(100)
+)
+BEGIN
+    INSERT INTO Genre (GID, genre_name) VALUES (GID, genre_name);
+END$$
+
+DELIMITER ;
+
+select * from genre;
+
+call add_genre(20,"Techno");
+
+select * from genre;
+
+-- function
+
+drop function day_difference;
+DELIMITER $$
+
+CREATE FUNCTION day_difference (start_date date , end_date date)
+RETURNS int
+deterministic
+BEGIN
+    -- Your function logic here
+    declare ret int;
+    set ret = datediff(end_date,start_date);
+    RETURN ret;
+END$$
+
+DELIMITER ;
+
+SELECT day_difference('2024-01-01', '2024-01-10');
 
