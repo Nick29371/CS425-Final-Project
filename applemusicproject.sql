@@ -319,3 +319,12 @@ SELECT *
 FROM Song
 ORDER BY SID DESC
 LIMIT 5;
+
+SELECT ar.artist_name AS artist, al.title_album AS album, s.sname AS song
+FROM Song s, ALbum al, Artist ar
+WHERE al.Album_ID = s.Album_ID && s.artist_ID = ar.artist_ID
+ORDER BY ar.artist_name;
+
+SELECT sname
+FROM Song
+WHERE Song.duration < '00:03:00';
