@@ -1,16 +1,17 @@
--- Implementation of Indexes, Temporary Tables, and Views: 
--- A student has implemented indexes effectively to optimize query performance. 
--- Temporary tables for data transformation. 
--- Created insightful and well-structured views that serve specific purposes.
-
--- Triggers, Stored Procedures, and Functions: 
--- A student has created triggers, stored procedures, and functions with intricate business logic, enhancing database functionality. 
--- Ensured triggers and procedures are well-structured and maintain data integrity.
-
-
 DROP DATABASE IF EXISTS `project`;
-CREATE DATABASE `project`;
+CREATE DATABASE IF NOT EXISTS `project`;
 USE `project`;
+
+DROP TABLE IF EXISTS album,
+                     artist,
+                     genre,
+                     playlist, 
+                     playlist_song, 
+                     song,
+                     song_review,
+                     user,
+                     user_contact;
+                     
 
 CREATE TABLE `Genre` (
     `GID` INT PRIMARY KEY,
@@ -95,35 +96,6 @@ INSERT INTO `Album` (album_ID, title_album, release_date, photo, release_type, a
 (15, 'Gotham Nights', '2023-05-25', 'https://example.com/albums/gotham_nights.jpg', 'Album', 15, 11);
 
 
-CREATE TABLE `Song` (
-    `SID` INT PRIMARY KEY,
-    `sname` VARCHAR(100) NOT NULL,
-    `duration` TIME,
-    `artist_ID` INT,
-    `album_ID` INT,
-    `GID` INT,
-    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID),
-    FOREIGN KEY (album_ID) REFERENCES Album(album_ID),
-    FOREIGN KEY (GID) REFERENCES Genre(GID)
-);
-
-INSERT INTO `Song` (SID, sname, duration, artist_ID, album_ID, GID) VALUES
-(1, 'Dreams Unfold', '00:03:45', 1, 1, 1),
-(2, 'Heartstrings', '00:04:20', 2, 2, 3),
-(3, 'Take Me Home', '00:02:50', 3, 3, 4),
-(4, 'Freedom Call', '00:03:15', 4, 4, 2),
-(5, 'Whispers in the Wind', '00:03:10', 5, 5, 5),
-(6, 'Building Up', '00:02:40', 6, 6, 6),
-(7, 'Emotional Waves', '00:03:55', 7, 7, 7),
-(8, 'Courageous Hearts', '00:04:05', 8, 8, 9),
-(9, 'Elmo’s Fun Song', '00:02:30', 9, 9, 12),
-(10, 'Fairy Tale Endings', '00:03:50', 10, 10, 8),
-(11, 'Magic in the Air', '00:04:30', 11, 11, 5),
-(12, 'Ron’s Dance', '00:03:05', 12, 12, 3),
-(13, 'Wisdom’s Echo', '00:04:15', 13, 13, 4),
-(14, 'Thunderous Rock', '00:03:40', 14, 14, 1),
-(15, 'Nights in Gotham', '00:04:00', 15, 15, 11);
-
 
 CREATE TABLE `User` (
     `UID` INT PRIMARY KEY,
@@ -142,21 +114,21 @@ CREATE TABLE `User` (
 );
 
 INSERT INTO `User` (UID, user_name, email, password, birthday_user, followers_no, following_no, subscription_ID, profile_picture, street_address, city, state, zip_code) VALUES
-(1, 'john_doe', 'john.doe@example.com', 'password123', '1990-05-15', 120, 50, 1, 'https://example.com/profiles/john.jpg', '123 Elm St', 'Springfield', 'IL', '62701'),
-(2, 'jane_smith', 'jane.smith@example.com', 'securePass456', '1985-10-30', 200, 150, 2, 'https://example.com/profiles/jane.jpg', '456 Oak St', 'Hometown', 'CA', '90210'),
-(3, 'mike_jones', 'mike.jones@example.com', 'mypassword789', '1992-03-22', 75, 30, 1, 'https://example.com/profiles/mike.jpg', '789 Pine St', 'Metropolis', 'NY', '10001'),
-(4, 'sara_connor', 'sara.connor@example.com', 'pass1234', '1998-12-11', 300, 200, 3, 'https://example.com/profiles/sara.jpg', '321 Maple St', 'Gotham', 'NJ', '07001'),
-(5, 'alice_wonder', 'alice.wonder@example.com', 'alicePassword!', '1995-07-18', 50, 20, NULL, 'https://example.com/profiles/alice.jpg', '654 Birch St', 'Wonderland', 'TX', '73301'),
-(6, 'bob_builder', 'bob.builder@example.com', 'buildIt123', '1988-01-25', 10, 5, 1, 'https://example.com/profiles/bob.jpg', '987 Cedar St', 'Tooltown', 'FL', '33101'),
-(7, 'charlie_brown', 'charlie.brown@example.com', 'goodgrief!', '1993-08-02', 85, 45, 2, 'https://example.com/profiles/charlie.jpg', '555 Cherry St', 'Peanuts', 'MA', '02101'),
-(8, 'diana_prince', 'diana.prince@example.com', 'wonderWoman99', '1986-09-19', 150, 80, 3, 'https://example.com/profiles/diana.jpg', '888 Amazon St', 'Themyscira', 'WA', '98001'),
-(9, 'elmo_red', 'elmo.red@example.com', 'tickleMe123', '2010-02-03', 500, 500, NULL, 'https://example.com/profiles/elmo.jpg', '444 Sesame St', 'New York', 'NY', '10002'),
-(10, 'fiona_fair', 'fiona.fair@example.com', 'fairyTale456', '1990-11-21', 120, 60, 1, 'https://example.com/profiles/fiona.jpg', '222 Fairy St', 'Enchanted', 'OR', '97001'),
-(11, 'harry_potter', 'harry.potter@example.com', 'expelliarmus!', '1985-07-31', 300, 200, 4, 'https://example.com/profiles/harry.jpg', '12 Grimmauld Pl', 'London', 'UK', 'W1A 1AA'),
-(12, 'ron_weasley', 'ron.weasley@example.com', 'weasley123', '1985-03-01', 250, 180, 4, 'https://example.com/profiles/ron.jpg', '4 The Burrow', 'Ottery St Catchpole', 'UK', 'EX11 1AA'),
-(13, 'hermione_granger', 'hermione.granger@example.com', 'knowitall99', '1985-09-19', 350, 300, 4, 'https://example.com/profiles/hermione.jpg', '7/8 Grimmauld Pl', 'London', 'UK', 'W1A 1AA'),
-(14, 'thor_odinson', 'thor.odinson@example.com', 'mjolnir2021', '1990-03-29', 150, 100, NULL, 'https://example.com/profiles/thor.jpg', 'Asgard', 'Asgard', 'NA', '00001'),
-(15, 'bruce_wayne', 'bruce.wayne@example.com', 'batman@wayne.com', '1980-02-19', 400, 350, 5, 'https://example.com/profiles/bruce.jpg', '1007 Mountain Dr', 'Gotham', 'NJ', '07002');
+(101, 'john_doe', 'john.doe@example.com', 'password123', '1990-05-15', 120, 50, 1, 'https://example.com/profiles/john.jpg', '123 Elm St', 'Springfield', 'IL', '62701'),
+(102, 'jane_smith', 'jane.smith@example.com', 'securePass456', '1985-10-30', 200, 150, 2, 'https://example.com/profiles/jane.jpg', '456 Oak St', 'Hometown', 'CA', '90210'),
+(103, 'mike_jones', 'mike.jones@example.com', 'mypassword789', '1992-03-22', 75, 30, 1, 'https://example.com/profiles/mike.jpg', '789 Pine St', 'Metropolis', 'NY', '10001'),
+(104, 'sara_connor', 'sara.connor@example.com', 'pass1234', '1998-12-11', 300, 200, 3, 'https://example.com/profiles/sara.jpg', '321 Maple St', 'Gotham', 'NJ', '07001'),
+(105, 'alice_wonder', 'alice.wonder@example.com', 'alicePassword!', '1995-07-18', 50, 20, NULL, 'https://example.com/profiles/alice.jpg', '654 Birch St', 'Wonderland', 'TX', '73301'),
+(106, 'bob_builder', 'bob.builder@example.com', 'buildIt123', '1988-01-25', 10, 5, 1, 'https://example.com/profiles/bob.jpg', '987 Cedar St', 'Tooltown', 'FL', '33101'),
+(107, 'charlie_brown', 'charlie.brown@example.com', 'goodgrief!', '1993-08-02', 85, 45, 2, 'https://example.com/profiles/charlie.jpg', '555 Cherry St', 'Peanuts', 'MA', '02101'),
+(108, 'diana_prince', 'diana.prince@example.com', 'wonderWoman99', '1986-09-19', 150, 80, 3, 'https://example.com/profiles/diana.jpg', '888 Amazon St', 'Themyscira', 'WA', '98001'),
+(109, 'elmo_red', 'elmo.red@example.com', 'tickleMe123', '2010-02-03', 500, 500, NULL, 'https://example.com/profiles/elmo.jpg', '444 Sesame St', 'New York', 'NY', '10002'),
+(110, 'fiona_fair', 'fiona.fair@example.com', 'fairyTale456', '1990-11-21', 120, 60, 1, 'https://example.com/profiles/fiona.jpg', '222 Fairy St', 'Enchanted', 'OR', '97001'),
+(111, 'harry_potter', 'harry.potter@example.com', 'expelliarmus!', '1985-07-31', 300, 200, 4, 'https://example.com/profiles/harry.jpg', '12 Grimmauld Pl', 'London', 'UK', 'W1A 1AA'),
+(112, 'ron_weasley', 'ron.weasley@example.com', 'weasley123', '1985-03-01', 250, 180, 4, 'https://example.com/profiles/ron.jpg', '4 The Burrow', 'Ottery St Catchpole', 'UK', 'EX11 1AA'),
+(113, 'hermione_granger', 'hermione.granger@example.com', 'knowitall99', '1985-09-19', 350, 300, 4, 'https://example.com/profiles/hermione.jpg', '7/8 Grimmauld Pl', 'London', 'UK', 'W1A 1AA'),
+(114, 'thor_odinson', 'thor.odinson@example.com', 'mjolnir2021', '1990-03-29', 150, 100, NULL, 'https://example.com/profiles/thor.jpg', 'Asgard', 'Asgard', 'NA', '00001'),
+(115, 'bruce_wayne', 'bruce.wayne@example.com', 'batman@wayne.com', '1980-02-19', 400, 350, 5, 'https://example.com/profiles/bruce.jpg', '1007 Mountain Dr', 'Gotham', 'NJ', '07002');
 
 
 
@@ -167,23 +139,23 @@ CREATE TABLE `User_Contact` (
 );
 
 INSERT INTO `User_Contact` (UID, phone_number) VALUES
-(1, '123-456-7890'),
-(2, '234-567-8901'),
-(3, '345-678-9012'),
-(4, '456-789-0123'),
-(5, '567-890-1234'),
-(6, '678-901-2345'),
-(7, '789-012-3456'),
-(8, '890-123-4567'),
-(9, '901-234-5678'),
-(10, '012-345-6789'),
-(1, '111-222-3333'),  
-(2, '222-333-4444'),  
-(11, '333-444-5555'),
-(12, '444-555-6666'),
-(13, '555-666-7777'),
-(14, '666-777-8888'),
-(15, '777-888-9999');
+(101, '123-456-7890'),
+(102, '234-567-8901'),
+(103, '345-678-9012'),
+(104, '456-789-0123'),
+(105, '567-890-1234'),
+(106, '678-901-2345'),
+(107, '789-012-3456'),
+(108, '890-123-4567'),
+(109, '901-234-5678'),
+(110, '012-345-6789'),
+(101, '111-222-3333'),  
+(102, '222-333-4444'),  
+(111, '333-444-5555'),
+(112, '444-555-6666'),
+(113, '555-666-7777'),
+(114, '666-777-8888'),
+(115, '777-888-9999');
 
 
 CREATE TABLE `Subscription` (
@@ -219,6 +191,53 @@ CREATE TABLE `Playlist` (
     FOREIGN KEY (UID) REFERENCES User(UID)
 );
 
+INSERT INTO Playlist (playlist_ID, playlist_name, UID) VALUES
+(1, 'Chill Vibes', 101),
+(2, 'Workout Pump', 102),
+(3, 'Study Playlist', 103),
+(4, 'Road Trip Jams', 104),
+(5, 'Party Mix', 101),
+(6, 'Classical Favorites', 105),
+(7, 'Rock Classics', 106),
+(8, 'Pop Hits', 102),
+(9, 'Relax & Unwind', 107),
+(10, 'Indie Discoveries', 103),
+(11, 'Jazz Essentials', 108),
+(12, 'Throwback Tunes', 104),
+(13, 'Hip Hop Anthems', 106),
+(14, 'Country Roads', 105),
+(15, 'EDM Party', 107);
+
+CREATE TABLE `Song` (
+    `SID` INT PRIMARY KEY,
+    `sname` VARCHAR(100) NOT NULL,
+    `duration` TIME,
+    `artist_ID` INT,
+    `album_ID` INT,
+    `GID` INT,
+    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID),
+    FOREIGN KEY (album_ID) REFERENCES Album(album_ID),
+    FOREIGN KEY (GID) REFERENCES Genre(GID)
+);
+
+INSERT INTO `Song` (SID, sname, duration, artist_ID, album_ID, GID) VALUES
+(1, 'Dreams Unfold', '00:03:45', 1, 1, 1),
+(2, 'Heartstrings', '00:04:20', 2, 2, 3),
+(3, 'Take Me Home', '00:02:50', 3, 3, 4),
+(4, 'Freedom Call', '00:03:15', 4, 4, 2),
+(5, 'Whispers in the Wind', '00:03:10', 5, 5, 5),
+(6, 'Building Up', '00:02:40', 6, 6, 6),
+(7, 'Emotional Waves', '00:03:55', 7, 7, 7),
+(8, 'Courageous Hearts', '00:04:05', 8, 8, 9),
+(9, 'Elmo’s Fun Song', '00:02:30', 9, 9, 12),
+(10, 'Fairy Tale Endings', '00:03:50', 10, 10, 8),
+(11, 'Magic in the Air', '00:04:30', 11, 11, 5),
+(12, 'Ron’s Dance', '00:03:05', 12, 12, 3),
+(13, 'Wisdom’s Echo', '00:04:15', 13, 13, 4),
+(14, 'Thunderous Rock', '00:03:40', 14, 14, 1),
+(15, 'Nights in Gotham', '00:04:00', 15, 15, 11);
+
+
 CREATE TABLE `Playlist_Song` (
     `playlist_ID` INT,
     `SID` INT,
@@ -226,6 +245,24 @@ CREATE TABLE `Playlist_Song` (
     FOREIGN KEY (playlist_ID) REFERENCES Playlist(playlist_ID),
     FOREIGN KEY (SID) REFERENCES Song(SID)
 );
+
+
+INSERT INTO Playlist_Song (playlist_ID, SID) VALUES
+(11, 2),
+(3, 10),
+(3, 5),
+(4, 12),
+(14, 13),
+(5, 12),
+(11, 10),
+(9, 3),
+(7, 12),
+(4, 9),
+(15, 14),
+(10, 12),
+(10, 9),
+(13, 4),
+(5, 3);
 
 
 
@@ -241,101 +278,21 @@ CREATE TABLE `Song_Review` (
 );
 
 INSERT INTO `Song_Review` (review_ID, rating, review_date, review_text, UID, SID) VALUES
-(1, 5, '2023-01-15', 'Absolutely loved this song!', 1, 1),
-(2, 4, '2023-02-20', 'Great melody and lyrics.', 2, 2),
-(3, 3, '2023-03-10', 'It was okay, not my favorite.', 3, 3),
-(4, 5, '2023-04-05', 'A masterpiece!', 4, 4),
-(5, 2, '2023-05-22', 'Not really my style.', 5, 5),
-(6, 4, '2023-06-17', 'Enjoyable but a bit repetitive.', 6, 6),
-(7, 1, '2023-07-12', 'Did not like it at all.', 7, 7),
-(8, 5, '2023-08-20', 'Perfect for my playlist!', 8, 8),
-(9, 3, '2023-09-15', 'Had higher expectations.', 9, 9),
-(10, 4, '2023-10-01', 'Very catchy tune!', 10, 10),
-(11, 2, '2023-11-11', 'Not bad, but could be better.', 11, 11),
-(12, 5, '2023-12-05', 'Love this artist!', 12, 12),
-(13, 4, '2024-01-10', 'Great production quality.', 13, 13),
-(14, 1, '2024-02-15', 'Really not impressed.', 14, 14),
-(15, 5, '2024-03-20', 'An instant classic!', 15, 15);
+(1, 5, '2023-01-15', 'Absolutely loved this song!', 101, 1),
+(2, 4, '2023-02-20', 'Great melody and lyrics.', 102, 2),
+(3, 3, '2023-03-10', 'It was okay, not my favorite.', 103, 3),
+(4, 5, '2023-04-05', 'A masterpiece!', 104, 4),
+(5, 2, '2023-05-22', 'Not really my style.', 105, 5),
+(6, 4, '2023-06-17', 'Enjoyable but a bit repetitive.', 106, 6),
+(7, 1, '2023-07-12', 'Did not like it at all.', 107, 7),
+(8, 5, '2023-08-20', 'Perfect for my playlist!', 108, 8),
+(9, 3, '2023-09-15', 'Had higher expectations.', 109, 9),
+(10, 4, '2023-10-01', 'Very catchy tune!', 110, 10),
+(11, 2, '2023-11-11', 'Not bad, but could be better.', 111, 11),
+(12, 5, '2023-12-05', 'Love this artist!', 112, 12),
+(13, 4, '2024-01-10', 'Great production quality.', 113, 13),
+(14, 1, '2024-02-15', 'Really not impressed.', 114, 14),
+(15, 5, '2024-03-20', 'An instant classic!', 115, 15);
 
 
--- index to make looking up zipcodes faster
-CREATE INDEX index_zipcode
-ON User (zip_code);
-
-show index from user;
-
--- temp table
-drop table most_influencial;
-CREATE TEMPORARY TABLE most_influencial AS
-SELECT UID, followers_no
-FROM user
-order by followers_no desc;
-
-select * from most_influencial;
-
--- view
-CREATE VIEW address_info AS
-SELECT UID,city,state,zip_code,street_address
-FROM user;
-
-select * from address_info;
-
--- trigger to make sure that cost is never negative
-
-DELIMITER $$
-
-CREATE TRIGGER check_cost
-before insert ON subscription
-FOR EACH ROW
-BEGIN
-    IF new.cost < 0 THEN
-        SET new.cost = 0;
-    END IF;
-END$$
-
-DELIMITER ;
-
-INSERT INTO `Subscription` (subscription_ID, start_date, end_date, plan_type, cost) VALUES
-(16, '2023-01-01', '2024-01-01', 'Individual', -10);
-
-select * from subscription
-
--- procedure to add a user
-
-DELIMITER $$
-
-CREATE PROCEDURE add_genre (
-	IN GID int,
-    IN genre_name VARCHAR(100)
-)
-BEGIN
-    INSERT INTO Genre (GID, genre_name) VALUES (GID, genre_name);
-END$$
-
-DELIMITER ;
-
-select * from genre;
-
-call add_genre(20,"Techno");
-
-select * from genre;
-
--- function
-
-drop function day_difference;
-DELIMITER $$
-
-CREATE FUNCTION day_difference (start_date date , end_date date)
-RETURNS int
-deterministic
-BEGIN
-    -- Your function logic here
-    declare ret int;
-    set ret = datediff(end_date,start_date);
-    RETURN ret;
-END$$
-
-DELIMITER ;
-
-SELECT day_difference('2024-01-01', '2024-01-10');
 
