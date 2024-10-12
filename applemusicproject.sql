@@ -295,4 +295,27 @@ INSERT INTO `Song_Review` (review_ID, rating, review_date, review_text, UID, SID
 (15, 5, '2024-03-20', 'An instant classic!', 115, 15);
 
 
+SELECT user_name AS UserName, followers_no AS Followers
+FROM User
+ORDER BY followers_no DESC
+LIMIT 5;
 
+SELECT artist_name AS Artist, genre_name AS Genre
+FROM Artist
+JOIN Genre ON Artist.GID = Genre.GID
+WHERE Genre.genre_name = 'Fantasy'; 
+
+SELECT user_name AS User, plan_type AS SubscriptionPlan, cost AS MonthlyCost
+FROM User
+JOIN Subscription ON User.subscription_ID = Subscription.subscription_ID
+WHERE plan_type = 'Trial';
+
+SELECT User.user_name AS User, Song_Review.rating AS Rating, Song_Review.review_text AS Review
+FROM Song_Review
+JOIN User ON Song_Review.UID = User.UID
+WHERE Song_Review.SID = 2; 
+
+SELECT *
+FROM Song
+ORDER BY SID DESC
+LIMIT 5;
