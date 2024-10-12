@@ -328,3 +328,187 @@ ORDER BY ar.artist_name;
 SELECT sname
 FROM Song
 WHERE Song.duration < '00:03:00';
+
+
+
+
+
+
+--The  5 most Followed Users on the Apple Music Database
+
+SELECT user_name AS UserName, followers_no AS Followers
+FROM User
+ORDER BY followers_no DESC
+LIMIT 5;
+
+
+
+
+--Show all the artists in a certain genre 
+
+SELECT artist_name AS Artist, genre_name AS Genre
+FROM Artist
+JOIN Genre ON Artist.GID = Genre.GID
+WHERE Genre.genre_name = 'Fantasy'; 
+
+
+
+
+--Showing all Users in a specific Plan, in this case Free Trial
+
+SELECT user_name AS User, plan_type AS SubscriptionPlan, cost AS MonthlyCost
+FROM User
+JOIN Subscription ON User.subscription_ID = Subscription.subscription_ID
+WHERE plan_type = 'Trial';
+
+
+
+
+
+--Showing all the reviews for a specific song, showing the user who made the review and their rating
+
+SELECT User.user_name AS User, Song_Review.rating AS Rating, Song_Review.review_text AS Review
+FROM Song_Review
+JOIN User ON Song_Review.UID = User.UID
+WHERE Song_Review.SID = 2; 
+
+
+
+
+
+
+
+--Showing the last 5 Songs on the Song Table:
+
+
+SELECT *
+FROM Song
+ORDER BY SID DESC
+LIMIT 5;
+
+
+
+
+
+
+--Show the reviews by all users (left join)
+
+select user.uid, review_ID, rating, review_date, review_text from user
+left join Song_review on Song_review.uid = user.uid
+
+
+
+
+--Ranks the number of followers
+SELECT 
+  UID, user_name, followers_no,
+  RANK() OVER (ORDER BY followers_no DESC) as ranking
+FROM user
+ORDER BY ranking
+limit 5
+
+
+
+
+
+
+
+--Looks for short songs from every playlist using the bridge entity
+select playlist.playlist_name, sname, duration
+from song
+inner join playlist_song on song.SID = playlist_song.SID
+inner join playlist on playlist_song.playlist_ID = playlist.playlist_ID
+where duration < '00:03:00'
+
+
+
+
+
+--Finds users with more followers than the average
+SELECT
+  UID, user_name, followers_no
+FROM user
+WHERE followers_no >
+    (SELECT AVG(followers_no)
+     FROM user)
+
+
+
+
+
+
+
+
+--Find Top 3 Longest Songs
+
+SELECT sname AS 'Song Name', duration AS 'Duration'
+FROM Song
+ORDER BY duration DESC
+LIMIT 3;
+
+
+
+
+
+
+
+
+--To find bad passwords that are easy to crack.
+select password from user
+where password like '%pass%'
+
+
+
+
+
+--Matches arist, album, and song and sorts alphabetically by artist name 
+SELECT ar.artist_name AS artist, al.title_album AS album, s.sname AS song
+FROM Song s, ALbum al, Artist ar
+WHERE al.Album_ID = s.Album_ID && s.artist_ID = ar.artist_ID
+ORDER BY ar.artist_name;
+
+
+
+--Retrieves all songs less than 3 mins
+
+SELECT sname
+FROM Song
+WHERE Song.duration < '00:03:00';
+
+
+
+--To find the total number of followers as well as the sum of the followers of each subscription type
+
+SELECT
+subscription_ID,
+  SUM(followers_no)
+FROM user
+GROUP BY subscription_ID with rollup
+
+
+--Return the running total of following_no for the first 7 users ordered alphabetically
+SELECT
+  user_name,
+  following_no,
+  SUM(following_no) OVER (ORDER BY user_name) AS running_total
+FROM user
+limit 7
+
+
+
+
+
+--Selects the bottom 50% of reviews based on rating
+select *
+from(    
+SELECT
+  review_ID, rating, review_date,
+NTILE(2) OVER (ORDER BY rating desc) as n_tile
+FROM Song_review
+ORDER BY rating
+) as t
+where n_tile = 2
+
+
+
+
