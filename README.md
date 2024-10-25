@@ -1,3 +1,4 @@
+pip install --upgrade mysql-connector-python
 
 # CRUD Operations with MySQL using Python
 
