@@ -1,47 +1,21 @@
-pip install --upgrade mysql-connector-python
-
 # CRUD Operations with MySQL using Python
 
-This project demonstrates **Create, Read, Update, and Delete (CRUD)** operations using Python with a **MySQL database**. The goal is to show how to perform basic database interactions programmatically using Python’s `mysql-connector-python` library.
-
-## Table of Contents
-
-- [Prerequisites](#prerequisites)
-- [Project Structure](#project-structure)
-- [Setup](#setup)
-- [Usage](#usage)
-- [CRUD Operations](#crud-operations)
-- [License](#license)
-
----
+This project demonstrates **Create, Read, Update, and Delete (CRUD)** operations using Python with a **MySQL database**.
 
 ## Prerequisites
 
 Before running this project, ensure you have the following installed:
 
-1. **Python 3.x**  
-   [Download Python](https://www.python.org/downloads/)
-
+1. **Python 3.x**
+   
 2. **MySQL Server**  
-   [Download MySQL](https://dev.mysql.com/downloads/)
 
-3. **mysql-connector-python** (Install via pip)  
+4. **mysql-connector-python** (Install via pip)  
    ```bash
    pip install mysql-connector-python
    ```
 
 ---
-
-## Project Structure
-
-```
-project-root/
-│
-├── README.md            # Project documentation
-├── requirements.txt     # Python dependencies
-├── crud.py              # Main Python file with CRUD logic
-└── config.py            # Database configuration (host, user, password, etc.)
-```
 
 ---
 
