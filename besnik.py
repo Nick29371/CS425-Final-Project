@@ -19,7 +19,7 @@ def execute_sql_query(query):
 def choose(choice, message, range):
   while choice not in range:
     print('Wrong choice; Try again')
-    choice = int(input(message))
+    choice = int(input('\n'+message))
   return choice    
 
 def start_message():
@@ -31,33 +31,37 @@ def start_message():
   print('4. update data')
   print('5. others')
   print('6. Exit')
-  return int(input('Enter your choice: '))
+  return int(input('\n'+'Enter your choice: '))
 
 def pick_table():
   result = execute_sql_query('show tables')
-  print(result)
+  for i in result:
+    print(i)
   message = 'Choose a table: '
-  response = choose(int(input(message)),message,range(len(result)))
+  response = choose(int(input('\n'+message)),message,range(len(result)))
   return result[response][0]
 
 def pick_column(table):
   result = [i[0] for i in execute_sql_query('show columns from '+table)]
-  print(result)
+  for i in result:
+    print(i)
   message = 'Choose column: '
-  response = choose(int(input(message)),message,list(range(len(result))))
+  response = choose(int(input('\n'+message)),message,list(range(len(result))))
   return result[response]
 
 def pick_column_verbose(table):
   result = execute_sql_query('show columns from '+table)
-  print(result)
+  for i in result:
+    print(i)
   message = 'Choose column: '
-  response = choose(int(input(message)),message,list(range(len(result))))
+  response = choose(int(input('\n'+message)),message,list(range(len(result))))
   return result[response]
 
 def read():
   table = pick_table()
   column = pick_column(table)
-  print(execute_sql_query('select '+column+' from '+table))
+  for i in execute_sql_query('select '+column+' from '+table):
+    print(i)
   return
  
 def create():
@@ -65,15 +69,14 @@ def create():
   attributes = execute_sql_query('show columns from '+table)
   for i in attributes:
     print(i)
-  response = input("Enter the new row (separated by whitespace): ")
+  response = input('\n'+"Enter the new row (separated by whitespace): ")
   lst = response.split()
   for i in range(len(lst)):
     if lst[i].isnumeric():
       lst[i] = int(lst[i])
   lst = tuple(lst)
   execute_sql_query("INSERT INTO "+table+" VALUES "+ str(lst))
-
-create()
+  return
 
 def update():
   pass
@@ -81,25 +84,23 @@ def update():
 def delete():
   pass
 
-
 def run():
-  choice = int(start_message())-1
+  choice = start_message()-1
   while choice in range(6):
     if choice == 0:
       read()
+    elif choice == 1:
+      create()      
+    elif choice == 2:
+      pass
+    elif choice == 3:
+      pass
+    elif choice == 4:
+      pass
+    elif choice == 5:
       return
-    if choice == 1:
+    else:
       pass
-    if choice == 2:
-      pass
-    if choice == 3:
-      pass
-    if choice == 4:
-      pass
-    if choice == 5:
-      pass
-  return 
-
-
-
-# run()
+    choice = start_message()-1
+  return
+run()
