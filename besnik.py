@@ -23,6 +23,7 @@ def choose(choice, message, range):
   return choice    
 
 def start_message():
+  print()
   print('Welcome to Apple Music Database')
   print('Menu:')
   print('1. read data')
@@ -37,7 +38,7 @@ def pick_table():
   result = execute_sql_query('show tables')
   for i in result:
     print(i)
-  message = 'Choose a table: '
+  message = 'Choose a table (starting from 0): '
   response = choose(int(input('\n'+message)),message,range(len(result)))
   return result[response][0]
 
@@ -45,7 +46,7 @@ def pick_column(table):
   result = [i[0] for i in execute_sql_query('show columns from '+table)]
   for i in result:
     print(i)
-  message = 'Choose column: '
+  message = 'Choose column (starting from 0): '
   response = choose(int(input('\n'+message)),message,list(range(len(result))))
   return result[response]
 
@@ -53,7 +54,7 @@ def pick_column_verbose(table):
   result = execute_sql_query('show columns from '+table)
   for i in result:
     print(i)
-  message = 'Choose column: '
+  message = 'Choose column (starting from 0): '
   response = choose(int(input('\n'+message)),message,list(range(len(result))))
   return result[response]
 
