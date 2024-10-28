@@ -45,7 +45,7 @@ CREATE TABLE `Artist` (
 	`hometown_state` VARCHAR(100),
 	`bio` TEXT,
 	`GID` INT,
-    FOREIGN KEY (GID) REFERENCES Genre(GID)
+    FOREIGN KEY (GID) REFERENCES Genre(GID) ON DELETE CASCADE
 );
 
 INSERT INTO `Artist` (artist_ID, artist_name, listeners_no, photo_cover, birth_date, hometown_state, bio, GID) VALUES
@@ -74,8 +74,8 @@ CREATE TABLE `Album` (
     `release_type` ENUM('Single', 'EP', 'Album') NOT NULL,
     `artist_ID` INT,
     `GID` INT,
-    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID),
-    FOREIGN KEY (GID) REFERENCES Genre(GID)
+    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID) ON DELETE CASCADE,
+    FOREIGN KEY (GID) REFERENCES Genre(GID) ON DELETE CASCADE
 );
 
 INSERT INTO `Album` (album_ID, title_album, release_date, photo, release_type, artist_ID, GID) VALUES
@@ -135,7 +135,7 @@ INSERT INTO `User` (UID, user_name, email, password, birthday_user, followers_no
 CREATE TABLE `User_Contact` (
     `UID` INT,
     `phone_number` VARCHAR(20) PRIMARY KEY,
-    FOREIGN KEY (UID) REFERENCES User(UID)
+    FOREIGN KEY (UID) REFERENCES User(UID)  ON DELETE CASCADE
 );
 
 INSERT INTO `User_Contact` (UID, phone_number) VALUES
@@ -188,7 +188,7 @@ CREATE TABLE `Playlist` (
     `playlist_ID` INT PRIMARY KEY,
     `playlist_name` VARCHAR(100) NOT NULL,
     `UID` INT,
-    FOREIGN KEY (UID) REFERENCES User(UID)
+    FOREIGN KEY (UID) REFERENCES User(UID) ON DELETE CASCADE
 );
 
 INSERT INTO Playlist (playlist_ID, playlist_name, UID) VALUES
@@ -215,9 +215,9 @@ CREATE TABLE `Song` (
     `artist_ID` INT,
     `album_ID` INT,
     `GID` INT,
-    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID),
-    FOREIGN KEY (album_ID) REFERENCES Album(album_ID),
-    FOREIGN KEY (GID) REFERENCES Genre(GID)
+    FOREIGN KEY (artist_ID) REFERENCES Artist(artist_ID) ON DELETE CASCADE,
+    FOREIGN KEY (album_ID) REFERENCES Album(album_ID) ON DELETE CASCADE,
+    FOREIGN KEY (GID) REFERENCES Genre(GID)  ON DELETE CASCADE
 );
 
 INSERT INTO `Song` (SID, sname, duration, artist_ID, album_ID, GID) VALUES
@@ -242,8 +242,8 @@ CREATE TABLE `Playlist_Song` (
     `playlist_ID` INT,
     `SID` INT,
     PRIMARY KEY (playlist_ID, SID),
-    FOREIGN KEY (playlist_ID) REFERENCES Playlist(playlist_ID),
-    FOREIGN KEY (SID) REFERENCES Song(SID)
+    FOREIGN KEY (playlist_ID) REFERENCES Playlist(playlist_ID) ON DELETE CASCADE,
+    FOREIGN KEY (SID) REFERENCES Song(SID)  ON DELETE CASCADE
 );
 
 
@@ -273,8 +273,8 @@ CREATE TABLE `Song_Review` (
     `review_text` TEXT,
     `UID` INT,
     `SID` INT,
-    FOREIGN KEY (UID) REFERENCES User(UID),
-    FOREIGN KEY (SID) REFERENCES Song(SID)
+    FOREIGN KEY (UID) REFERENCES User(UID) ON DELETE CASCADE,
+    FOREIGN KEY (SID) REFERENCES Song(SID) ON DELETE CASCADE
 );
 
 INSERT INTO `Song_Review` (review_ID, rating, review_date, review_text, UID, SID) VALUES
@@ -330,31 +330,15 @@ FROM Song
 WHERE Song.duration < '00:03:00';
 
 
-
-
-
-
---The  5 most Followed Users on the Apple Music Database
-
 SELECT user_name AS UserName, followers_no AS Followers
 FROM User
 ORDER BY followers_no DESC
 LIMIT 5;
 
-
-
-
---Show all the artists in a certain genre 
-
 SELECT artist_name AS Artist, genre_name AS Genre
 FROM Artist
 JOIN Genre ON Artist.GID = Genre.GID
 WHERE Genre.genre_name = 'Fantasy'; 
-
-
-
-
---Showing all Users in a specific Plan, in this case Free Trial
 
 SELECT user_name AS User, plan_type AS SubscriptionPlan, cost AS MonthlyCost
 FROM User
@@ -365,20 +349,11 @@ WHERE plan_type = 'Trial';
 
 
 
---Showing all the reviews for a specific song, showing the user who made the review and their rating
-
 SELECT User.user_name AS User, Song_Review.rating AS Rating, Song_Review.review_text AS Review
 FROM Song_Review
 JOIN User ON Song_Review.UID = User.UID
 WHERE Song_Review.SID = 2; 
 
-
-
-
-
-
-
---Showing the last 5 Songs on the Song Table:
 
 
 SELECT *
@@ -389,116 +364,60 @@ LIMIT 5;
 
 
 
-
-
---Show the reviews by all users (left join)
-
 select user.uid, review_ID, rating, review_date, review_text from user
-left join Song_review on Song_review.uid = user.uid
+left join Song_review on Song_review.uid = user.uid;
 
-
-
-
---Ranks the number of followers
-SELECT 
+SELECT
   UID, user_name, followers_no,
   RANK() OVER (ORDER BY followers_no DESC) as ranking
 FROM user
 ORDER BY ranking
-limit 5
+limit 5;
 
-
-
-
-
-
-
---Looks for short songs from every playlist using the bridge entity
 select playlist.playlist_name, sname, duration
 from song
 inner join playlist_song on song.SID = playlist_song.SID
 inner join playlist on playlist_song.playlist_ID = playlist.playlist_ID
-where duration < '00:03:00'
+where duration < '00:03:00';
 
-
-
-
-
---Finds users with more followers than the average
 SELECT
   UID, user_name, followers_no
 FROM user
 WHERE followers_no >
     (SELECT AVG(followers_no)
-     FROM user)
+     FROM user);
 
-
-
-
-
-
-
-
---Find Top 3 Longest Songs
 
 SELECT sname AS 'Song Name', duration AS 'Duration'
 FROM Song
 ORDER BY duration DESC
 LIMIT 3;
 
-
-
-
-
-
-
-
---To find bad passwords that are easy to crack.
 select password from user
-where password like '%pass%'
+where password like '%pass%';
 
-
-
-
-
---Matches arist, album, and song and sorts alphabetically by artist name 
 SELECT ar.artist_name AS artist, al.title_album AS album, s.sname AS song
 FROM Song s, ALbum al, Artist ar
 WHERE al.Album_ID = s.Album_ID && s.artist_ID = ar.artist_ID
 ORDER BY ar.artist_name;
 
-
-
---Retrieves all songs less than 3 mins
-
 SELECT sname
 FROM Song
 WHERE Song.duration < '00:03:00';
-
-
-
---To find the total number of followers as well as the sum of the followers of each subscription type
 
 SELECT
 subscription_ID,
   SUM(followers_no)
 FROM user
-GROUP BY subscription_ID with rollup
+GROUP BY subscription_ID with rollup;
 
-
---Return the running total of following_no for the first 7 users ordered alphabetically
 SELECT
   user_name,
   following_no,
   SUM(following_no) OVER (ORDER BY user_name) AS running_total
 FROM user
-limit 7
+limit 7;
 
-
-
-
-
---Selects the bottom 50% of reviews based on rating
 select *
 from(    
 SELECT
@@ -507,8 +426,4 @@ NTILE(2) OVER (ORDER BY rating desc) as n_tile
 FROM Song_review
 ORDER BY rating
 ) as t
-where n_tile = 2
-
-
-
-
+where n_tile = 2;
