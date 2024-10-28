@@ -8,12 +8,6 @@ db = mysql.connector.connect(
 )
 mycursor = db.cursor()
 
-def choose(choice, message, range):
-  while choice not in range:
-    print('Wrong choice; Try again')
-    choice = int(input(message))
-  return choice
-    
 def execute_sql_query(query):
   mycursor.execute(query)
   myresult = mycursor.fetchall()
@@ -21,6 +15,12 @@ def execute_sql_query(query):
   for x in myresult:
     lst.append(x)
   return lst
+
+def choose(choice, message, range):
+  while choice not in range:
+    print('Wrong choice; Try again')
+    choice = int(input(message))
+  return choice    
 
 def start_message():
   print('Welcome to Apple Music Database')
@@ -47,6 +47,13 @@ def pick_column(table):
   response = choose(int(input(message)),message,list(range(len(result))))
   return result[response]
 
+def pick_column_verbose(table):
+  result = execute_sql_query('show columns from '+table)
+  print(result)
+  message = 'Choose column: '
+  response = choose(int(input(message)),message,list(range(len(result))))
+  return result[response]
+
 def read():
   table = pick_table()
   column = pick_column(table)
@@ -54,13 +61,26 @@ def read():
   return
  
 def create():
-  pass
+  table = pick_table()
+  attributes = execute_sql_query('show columns from '+table)
+  for i in attributes:
+    print(i)
+  response = input("Enter the new row (separated by whitespace): ")
+  lst = response.split()
+  for i in range(len(lst)):
+    if lst[i].isnumeric():
+      lst[i] = int(lst[i])
+  lst = tuple(lst)
+  execute_sql_query("INSERT INTO "+table+" VALUES "+ str(lst))
+
+create()
 
 def update():
   pass
 
 def delete():
   pass
+
 
 def run():
   choice = int(start_message())-1
@@ -82,4 +102,4 @@ def run():
 
 
 
-run()
+# run()
