@@ -9,23 +9,6 @@ db = mysql.connector.connect(
 cursor = db.cursor()
 
 
-# mycursor.execute("SELECT * FROM genre")
-
-# def create():
-
-#   pass
-
-# def read(table):
-#  # mycursor.execute("SELECT * FROM "+table)
-#   pass
-
-# def update():
-#   pass
-
-# def delete():
-#   pass
-
-
 def ask():
     print("Welcome to Apple Music Database")
     while True:
