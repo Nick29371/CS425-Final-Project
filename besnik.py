@@ -30,7 +30,7 @@ def start_message():
   print('2. write data')
   print('3. insert data')
   print('4. update data')
-  print('5. others')
+  print('5. save data')
   print('6. Exit')
   return int(input('\n'+'Enter your choice: '))
 
@@ -92,7 +92,13 @@ def update():
   return
 
 def delete():
-  pass
+  table = pick_table()
+  execute_sql_query("DELETE FROM "+table)
+  return
+
+def save():
+  db.commit()
+  return
 
 def run():
   choice = start_message()-1
@@ -102,16 +108,13 @@ def run():
     elif choice == 1:
       create()      
     elif choice == 2:
-      pass
+      delete()
     elif choice == 3:
       update()
-      pass
     elif choice == 4:
-      pass
+      save()
     elif choice == 5:
       return
-    else:
-      pass
     choice = start_message()-1
   return
 run()
