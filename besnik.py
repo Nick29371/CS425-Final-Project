@@ -80,7 +80,16 @@ def create():
   return
 
 def update():
-  pass
+  table = pick_table()
+  column = pick_column(table)
+  attributes = execute_sql_query('show columns from '+table)
+  for i in attributes:
+    print(i)
+  response = input('\n'+"Enter the new value for "+column+": ")
+  if not response.isnumeric():
+    response = "'"+response+"'"
+  execute_sql_query("UPDATE "+table+" SET "+column+" = "+response)
+  return
 
 def delete():
   pass
@@ -95,6 +104,7 @@ def run():
     elif choice == 2:
       pass
     elif choice == 3:
+      update()
       pass
     elif choice == 4:
       pass
