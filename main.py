@@ -138,7 +138,6 @@ def create_genre(genre_name):
     INSERT INTO genre (genre_name)
     VALUES (%s)
     ''', (genre_name,))
-    
     db.commit()  
 
 def create_artist(artist_name, listeners_no, photo_cover, birth_date, hometown_state, bio, GID):
@@ -162,33 +161,33 @@ def create_user(user_name, email, password, birthday_user, followers_no, followi
     cursor.execute(''' INSERT INTO User (user_name, email, password, birthday_user, followers_no, following_no, subscription_ID, profile_picture, street_address, city, state, zip_code)
     VALUES (%s, %s, %s, %s, %s, %s,%s, %s, %s, %s, %s,%s)
     ''', (user_name, email, password, birthday_user, followers_no, following_no, subscription_ID, profile_picture, street_address, city, state, zip_code))
-    db.commit
+    db.commit()
 
 def create_playlist(playlist_name, UID):
     cursor = db.cursor()
     cursor.execute(''' INSERT INTO Playlist ( playlist_name, UID)
     VALUES (%s, %s)
     ''', (playlist_name, UID))
-    db.commit
+    db.commit()
 
 def create_song(sname, duration, artist_ID, album_ID, GID):
     cursor = db.cursor()
     cursor.execute(''' INSERT INTO Song (sname, duration, artist_ID, album_ID, GID)
     VALUES (%s, %s, %s, %s, %s)
     ''', (sname, duration, artist_ID, album_ID, GID))
-    db.commit
+    db.commit()
 
 def create_song_review(rating, review_date, review_text, UID, SID):
     cursor = db.cursor()
     cursor.execute(''' INSERT INTO Song_Review (rating, review_date, review_text, UID, SID)
     VALUES (%s, %s, %s, %s, %s)
     ''', (rating, review_date, review_text, UID, SID))
-    db.commit
+    db.commit()
 
 def input_genre_data():
     genre_name = input("Enter the name of the genre: ")
     create_genre(genre_name)  # Call create function
-    print(f"Genre '{genre_name}' added to the database successfully.")
+    print(f"Genre '{genre_name}' added")
 
 def input_song_review():
     SID = input("Enter the Song ID: ")
@@ -197,7 +196,7 @@ def input_song_review():
     review_text = input ("Enter the Text Review: ")
     review_date = input ("Enter the Date of the Review: ")
     create_song_review (rating, review_date, review_text, UID, SID)
-    print(f"Song_Review: '{review_text}' added to the database successfully.")
+    print(f"Song_Review: '{review_text}' added")
 
 
 def input_song_data():  
@@ -207,7 +206,7 @@ def input_song_data():
     album_ID = input("Enter the Album ID: ")
     GID = input("Enter the Gender ID: ")
     create_song(sname, duration, artist_ID, album_ID, GID)
-    print(f"Song '{sname}' added to the database successfully.")
+    print(f"Song '{sname}' added")
 
 def input_album_data():
     title_album = input ("Enter the Album Name: ")
@@ -217,22 +216,21 @@ def input_album_data():
     artist_ID = input("What is the Artist ID ? :")
     GID = input ("what is the Genre ID: ")
     create_album(title_album, release_date, photo, release_type,artist_ID, GID)
-    print(f"Album '{title_album}' added to the database successfully.")
+    print(f"Album '{title_album}' added")
 
 def input_artist_data():
     artist_name = input("Enter the artist's name: ")
     listeners_no = input("Enter the number of listeners: ")
-    photo_cover = input("Enter the artist's photo cover URL (optional): ")
+    photo_cover = input("Enter the artist's photo cover URL: ")
     birth_date = input("Enter the artist's birth date (YYYY-MM-DD): ")
     hometown_state = input("Enter the artist's hometown state: ")
     bio = input("Enter the artist's bio: ")
     GID = input("Enter the Genre ID (GID) of the artist: ")
 
     create_artist(artist_name, listeners_no, photo_cover, birth_date, hometown_state, bio, GID)
-    print(f"Artist '{artist_name}' added to the database successfully.")
+    print(f"Artist '{artist_name}' added")
 
 def input_user_data():
-    
     user_name = input("Enter the user's name: ")
     email = input("Enter the user's email: ")
     password = input("Enter the user's password: ")
@@ -247,12 +245,10 @@ def input_user_data():
     zip_code = input("Enter the zip code: ")
 
     create_user(user_name, email, password, birthday_user, followers_no, following_no, subscription_ID, profile_picture, street_address, city, state, zip_code)
-    print(f"User '{user_name}' added to the database successfully.")
+    print(f"User '{user_name}' added")
 
-def input_playlist_data():
-    
+def input_playlist_data(): 
     playlist_name = input("Enter the Playlist Name: ")
     UID = input("Enter the USER ID: ")
     create_playlist(playlist_name, UID)
-    print(f"Playlist '{playlist_name}' added to the database successfully.")
-
+    print(f"Playlist '{playlist_name}' added")
