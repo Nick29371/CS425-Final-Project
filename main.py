@@ -1,5 +1,4 @@
 import mysql.connector
-from mysql.connector import IntegrityError, ProgrammingError, InterfaceError
 
 db = mysql.connector.connect(
     host="localhost",
