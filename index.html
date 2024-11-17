@@ -14,36 +14,9 @@
         <link href="styles.css" rel="stylesheet" />
         <script type="module" src="/pyscript/core.js"></script>
         <link rel="stylesheet" href="/pyscript/core.css">
-        <script>
-            function runPythonScript() {
-                var xhr = new XMLHttpRequest();
-                xhr.open(“GET”, “https://github.com/Nick29371/CS425-Final-Project/blob/main/test.py”, true);
-                xhr.send();
-            }                
-         </script>
     </head>
 
-
-
-
     <body>
-            <button onclick="runPython()">Run Python Script</button>
-
-    <script>
-        function runPython() {
-            fetch('http://127.0.0.1:5000/run-python')
-                .then(response => response.json())
-                .then(data => {
-                    if (data.output) {
-                        alert("Python Output: " + data.output);
-                    } else {
-                        console.error("Error:", data.error);
-                        alert("Error: " + data.error);
-                    }
-                })
-                .catch(error => console.error("Fetch Error:", error));
-        }
-    </script>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
@@ -51,6 +24,13 @@
             </div>
         </nav>
         <!-- Page content-->
+        <script>
+            function runPythonScript() {
+                var xhr = new XMLHttpRequest();
+                xhr.open(“GET”, “https://github.com/Nick29371/CS425-Final-Project/blob/main/test.py”, true);
+                xhr.send();
+            }                
+         </script>
         <div class="container">
             <div>
                 <button type="button" onclick="runPythonScript()" class="btn btn-primary">Primary</button>
