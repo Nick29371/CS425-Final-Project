@@ -21,10 +21,10 @@
 
 
     <body>
-            <button onclick="runPythonScript()">Run Python Script</button>
+            <button onclick="runPython()">Run Python Script</button>
 
     <script>
-        function runPythonScript() {
+        function runPython() {
             fetch('http://127.0.0.1:5000/run-python')
                 .then(response => response.json())
                 .then(data => {
