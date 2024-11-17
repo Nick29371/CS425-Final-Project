@@ -14,7 +14,13 @@
         <link href="styles.css" rel="stylesheet" />
         <script type="module" src="/pyscript/core.js"></script>
         <link rel="stylesheet" href="/pyscript/core.css">
-        
+        <script>
+            function runPythonScript() {
+                var xhr = new XMLHttpRequest();
+                xhr.open(“GET”, “test.py”, true);
+                xhr.send();
+            }                
+         </script>
     </head>
 
 
@@ -48,13 +54,6 @@
         <div class="container">
             <div>
                 <button type="button" onclick="runPythonScript()" class="btn btn-primary">Primary</button>
-                <script>
-                function runPythonScript() {
-                        var xhr = new XMLHttpRequest();
-                        xhr.open(“GET”, “test.py”, true);
-                        xhr.send();
-                }                
-                </script>
                 <button type="button" class="btn btn-secondary">Secondary</button>
                 <button type="button" class="btn btn-success">Success</button>
                 <button type="button" class="btn btn-danger">Danger</button>
