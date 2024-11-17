@@ -14,6 +14,12 @@
         <link href="styles.css" rel="stylesheet" />
         <script type="module" src="/pyscript/core.js"></script>
         <link rel="stylesheet" href="/pyscript/core.css">
+        <script>
+            function runPythonScript() {
+                var pythonScriptPath = "path/to/python/script.py";
+                subprocess.run(["python", pythonScriptPath]);
+            }
+        </script>
     </head>
 
 
@@ -29,7 +35,7 @@
         <!-- Page content-->
         <div class="container">
             <div>
-                <button type="button" class="btn btn-primary">Primary</button>
+                <button type="button" onclick="runPythonScript()" class="btn btn-primary">Primary</button>
                 <button type="button" class="btn btn-secondary">Secondary</button>
                 <button type="button" class="btn btn-success">Success</button>
                 <button type="button" class="btn btn-danger">Danger</button>
