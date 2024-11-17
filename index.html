@@ -21,6 +21,23 @@
 
 
     <body>
+            <button onclick="runPythonScript()">Run Python Script</button>
+
+    <script>
+        function runPythonScript() {
+            fetch('http://127.0.0.1:5000/run-python')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.output) {
+                        alert("Python Output: " + data.output);
+                    } else {
+                        console.error("Error:", data.error);
+                        alert("Error: " + data.error);
+                    }
+                })
+                .catch(error => console.error("Fetch Error:", error));
+        }
+    </script>
         <!-- Responsive navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <div class="container">
