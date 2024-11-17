@@ -24,16 +24,16 @@
             </div>
         </nav>
         <!-- Page content-->
-        <script>
-            function runPythonScript() {
-                var xhr = new XMLHttpRequest();
-                xhr.open(“GET”, “https://github.com/Nick29371/CS425-Final-Project/blob/main/test.py”, true);
-                xhr.send();
-            }                
-         </script>
         <div class="container">
             <div>
                 <button type="button" onclick="runPythonScript()" class="btn btn-primary">Primary</button>
+                <script>
+                function runPythonScript() {
+                    var xhr = new XMLHttpRequest();
+                    xhr.open(“GET”, “https://github.com/Nick29371/CS425-Final-Project/blob/main/test.py”, true);
+                    xhr.send();
+                }                
+                </script>
                 <button type="button" class="btn btn-secondary">Secondary</button>
                 <button type="button" class="btn btn-success">Success</button>
                 <button type="button" class="btn btn-danger">Danger</button>
