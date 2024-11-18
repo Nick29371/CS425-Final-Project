@@ -17,8 +17,6 @@ Before running this project, ensure you have the following installed:
 
 # TODO:
 
-Fill in in the mysql connector details for your mysql server in the main.py file 
+Build GUI
 
-Run the mysql script (included) on your mysql server to create the database.
-
-Run the main.py file.
+Run main.py file with arguments through JS
