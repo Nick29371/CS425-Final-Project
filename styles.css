@@ -9,6 +9,17 @@ body {
       background-color: #f9f9f9;
       color: #000;
 }
+
+a {
+background: white;
+color: #ff2d55;
+border: none;
+padding: 10px 20px;
+font-size: 1rem;
+border-radius: 5px;
+cursor: pointer;
+}
+
 .center {
   display: block;
   margin-left: auto;
