@@ -6,11 +6,9 @@
   <title>Apple Music Style</title>
   <style>
     /* Reset */
-    body, h1, h2, h3, p, ul, li, a {
+    body, h1, h2, h3, p, ul, li, a, input, button {
       margin: 0;
       padding: 0;
-      list-style: none;
-      text-decoration: none;
       box-sizing: border-box;
     }
 
@@ -18,7 +16,6 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       background-color: #f9f9f9;
       color: #000;
-      margin: 0;
     }
 
     /* Navigation Bar */
@@ -74,58 +71,74 @@
       background: #ffe6e9;
     }
 
-    /* Music Section */
-    .music-section {
-      padding: 20px;
+    /* Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      justify-content: center;
+      align-items: center;
     }
 
-    .music-section h2 {
-      font-size: 1.5rem;
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 400px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .modal-content h2 {
       margin-bottom: 20px;
     }
 
-    .albums {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
+    .form-group {
+      margin-bottom: 15px;
     }
 
-    .album {
-      background: white;
-      border-radius: 10px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      overflow: hidden;
-      width: 200px;
-      text-align: center;
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
     }
 
-    .album img {
+    .form-group input, .form-group select {
       width: 100%;
-      height: auto;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
     }
 
-    .album h3 {
-      font-size: 1rem;
-      padding: 10px 0;
+    .form-actions {
+      display: flex;
+      justify-content: space-between;
     }
 
-    .album p {
-      font-size: 0.9rem;
-      color: #555;
-      margin-bottom: 10px;
-    }
-
-    .album button {
-      background: #ff2d55;
-      color: white;
+    .form-actions button {
+      padding: 10px 20px;
       border: none;
-      padding: 5px 10px;
       border-radius: 5px;
       cursor: pointer;
-      margin-bottom: 10px;
     }
 
-    .album button:hover {
+    .form-actions .cancel {
+      background: #ccc;
+    }
+
+    .form-actions .submit {
+      background: #ff2d55;
+      color: white;
+    }
+
+    .form-actions .submit:hover {
       background: #ff375f;
     }
   </style>
@@ -149,36 +162,90 @@
   <div class="hero">
     <h1>Welcome to Apple Music</h1>
     <p>Stream 100 million songs ad-free, anytime.</p>
-    <button>Start Free Trial</button>
+    <button id="createAccountBtn">Create an Account</button>
   </div>
 
-  <!-- Music Section -->
-  <div class="music-section">
-    <h2>Featured Albums</h2>
-    <div class="albums">
-      <!-- Album 1 -->
-      <div class="album">
-        <img src="https://via.placeholder.com/200" alt="Album Cover">
-        <h3>Album Title</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-      <!-- Album 2 -->
-      <div class="album">
-        <img src="https://via.placeholder.com/200" alt="Album Cover">
-        <h3>Album Title</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
-      <!-- Album 3 -->
-      <div class="album">
-        <img src="https://via.placeholder.com/200" alt="Album Cover">
-        <h3>Album Title</h3>
-        <p>Artist Name</p>
-        <button>Play</button>
-      </div>
+  <!-- Modal -->
+  <div class="modal" id="accountModal">
+    <div class="modal-content">
+      <h2>Create an Account</h2>
+      <form id="accountForm">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required>
+        </div>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <div class="form-group">
+          <label for="birthday">Birthday</label>
+          <input type="date" id="birthday" name="birthday" required>
+        </div>
+        <div class="form-group">
+          <label for="subscription">Subscription Type</label>
+          <select id="subscription" name="subscription" required>
+            <option value="free">Free</option>
+            <option value="individual">Individual</option>
+            <option value="family">Family</option>
+            <option value="student">Student</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="city">City</label>
+          <input type="text" id="city" name="city" required>
+        </div>
+        <div class="form-group">
+          <label for="state">State</label>
+          <input type="text" id="state" name="state" required>
+        </div>
+        <div class="form-group">
+          <label for="zipcode">Zip Code</label>
+          <input type="text" id="zipcode" name="zipcode" required>
+        </div>
+        <div class="form-actions">
+          <button type="button" class="cancel" id="cancelBtn">Cancel</button>
+          <button type="submit" class="submit">Submit</button>
+        </div>
+      </form>
     </div>
   </div>
+
+  <script>
+    // Open Modal
+    const createAccountBtn = document.getElementById('createAccountBtn');
+    const accountModal = document.getElementById('accountModal');
+    const cancelBtn = document.getElementById('cancelBtn');
+
+    createAccountBtn.addEventListener('click', () => {
+      accountModal.classList.add('active');
+    });
+
+    // Close Modal
+    cancelBtn.addEventListener('click', () => {
+      accountModal.classList.remove('active');
+    });
+
+    // Form Submission
+    const accountForm = document.getElementById('accountForm');
+    accountForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(accountForm);
+      const data = Object.fromEntries(formData.entries());
+      console.log('Form Data:', data);
+      alert('Account Created Successfully!');
+      accountModal.classList.remove('active');
+      accountForm.reset();
+    });
+  </script>
 
 </body>
 </html>
