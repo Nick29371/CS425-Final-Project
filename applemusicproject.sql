@@ -128,7 +128,7 @@ INSERT INTO `User` (UID, user_name, email, password, birthday_user, followers_no
 (112, 'ron_weasley', 'ron.weasley@example.com', 'weasley123', '1985-03-01', 250, 180, 4, 'https://example.com/profiles/ron.jpg', '4 The Burrow', 'Ottery St Catchpole', 'UK', 'EX11 1AA'),
 (113, 'hermione_granger', 'hermione.granger@example.com', 'knowitall99', '1985-09-19', 350, 300, 4, 'https://example.com/profiles/hermione.jpg', '7/8 Grimmauld Pl', 'London', 'UK', 'W1A 1AA'),
 (114, 'thor_odinson', 'thor.odinson@example.com', 'mjolnir2021', '1990-03-29', 150, 100, NULL, 'https://example.com/profiles/thor.jpg', 'Asgard', 'Asgard', 'NA', '00001'),
-(115, 'bruce_wayne', 'bruce.wayne@example.com', 'batman@wayne.com', '1980-02-19', 400, 350, 5, 'https://example.com/profiles/bruce.jpg', '1007 Mountain Dr', 'Gotham', 'NJ', '07002');
+(115, 'bruce_wayne', 'bruce.wayne@example.com', 'batman@wayneindustries.com', '1980-02-19', 400, 350, 5, 'https://example.com/profiles/bruce.jpg', '1007 Mountain Dr', 'Gotham', 'NJ', '07002');
 
 
 
