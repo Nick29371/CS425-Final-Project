@@ -100,21 +100,9 @@ def save():
   db.commit()
   return
 
-def run():
-  choice = start_message()-1
-  while choice in range(6):
-    if choice == 0:
-      read()
-    elif choice == 1:
-      create()      
-    elif choice == 2:
-      delete()
-    elif choice == 3:
-      update()
-    elif choice == 4:
-      save()
-    elif choice == 5:
-      return
-    choice = start_message()-1
-  return
-run()
+def main(func):
+    func()
+
+if __name__ == "__main__":    # file needs to be ran with CRUD argument
+    func = sys.argv[1]
+    main(func)
