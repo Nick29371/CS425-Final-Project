@@ -22,10 +22,10 @@
         <!-- Page content-->
         <div class="container">
             <div>
-                <button type="button" onclick="runPythonScript(CRUD)" class="btn btn-primary">Create</button>
-                <button type="button" onclick="runPythonScript(CRUD)" class="btn btn-secondary">Read</button>
-                <button type="button" onclick="runPythonScript(CRUD)" class="btn btn-success">Update</button>
-                <button type="button" onclick="runPythonScript(CRUD)" class="btn btn-danger">Delete</button>
+                <button type="button" onclick="runPythonScript('create')" class="btn btn-primary">Create</button>
+                <button type="button" onclick="runPythonScript('read')" class="btn btn-secondary">Read</button>
+                <button type="button" onclick="runPythonScript('update')" class="btn btn-success">Update</button>
+                <button type="button" onclick="runPythonScript('delete')" class="btn btn-danger">Delete</button>
                 <script>
                 function runPythonScript(func) {
                     var xhr = new XMLHttpRequest();
