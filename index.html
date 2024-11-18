@@ -1,43 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Bare - Welcome to Apple Music</title>
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="styles.css" rel="stylesheet" />
-        <script type="module" src="/pyscript/core.js"></script>
-        <link rel="stylesheet" href="/pyscript/core.css">
-    </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Music Style</title>
+  <style>
+    /* Reset */
+    body, h1, h2, h3, p, ul, li, a {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
 
-    <body>
-        <!-- Responsive navbar-->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <div class="container">
-                <a class="navbar-brand" href="#">CS 425 MySQL Final Project</a>
-            </div>
-        </nav>
-        <!-- Page content-->
-        <div class="container">
-            <div>
-                <button type="button" onclick="runPythonScript('create')" class="btn btn-primary">Create</button>
-                <button type="button" onclick="runPythonScript('read')" class="btn btn-secondary">Read</button>
-                <button type="button" onclick="runPythonScript('update')" class="btn btn-success">Update</button>
-                <button type="button" onclick="runPythonScript('delete')" class="btn btn-danger">Delete</button>
-                <script>
-                function runPythonScript(func) {
-                    var xhr = new XMLHttpRequest();
-                    xhr.open("GET", "test.py ${func}", true);
-                    xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
-                    xhr.send();
-                }                
-                </script>
-            </div>
-        </div>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #000;
+      margin: 0;
+    }
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
+    /* Navigation Bar */
+    .navbar {
+      background: #1c1c1e;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    }
+
+    .navbar a {
+      color: #fff;
+      font-weight: bold;
+      margin: 0 10px;
+    }
+
+    .navbar a:hover {
+      color: #ff2d55;
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(45deg, #ff2d55, #ff375f);
+      color: white;
+      text-align: center;
+      padding: 50px 20px;
+    }
+
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+    }
+
+    .hero button {
+      background: white;
+      color: #ff2d55;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero button:hover {
+      background: #ffe6e9;
+    }
+
+    /* Music Section */
+    .music-section {
+      padding: 20px;
+    }
+
+    .music-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .albums {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .album {
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      width: 200px;
+      text-align: center;
+    }
+
+    .album img {
+      width: 100%;
+      height: auto;
+    }
+
+    .album h3 {
+      font-size: 1rem;
+      padding: 10px 0;
+    }
+
+    .album p {
+      font-size: 0.9rem;
+      color: #555;
+      margin-bottom: 10px;
+    }
+
+    .album button {
+      background: #ff2d55;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-bottom: 10px;
+    }
+
+    .album button:hover {
+      background: #ff375f;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">
+      <a href="#">Apple Music</a>
+    </div>
+    <div class="nav-links">
+      <a href="#">Browse</a>
+      <a href="#">Radio</a>
+      <a href="#">Library</a>
+      <a href="#">Search</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Welcome to Apple Music</h1>
+    <p>Stream 100 million songs ad-free, anytime.</p>
+    <button>Start Free Trial</button>
+  </div>
+
+  <!-- Music Section -->
+  <div class="music-section">
+    <h2>Featured Albums</h2>
+    <div class="albums">
+      <!-- Album 1 -->
+      <div class="album">
+        <img src="https://via.placeholder.com/200" alt="Album Cover">
+        <h3>Album Title</h3>
+        <p>Artist Name</p>
+        <button>Play</button>
+      </div>
+      <!-- Album 2 -->
+      <div class="album">
+        <img src="https://via.placeholder.com/200" alt="Album Cover">
+        <h3>Album Title</h3>
+        <p>Artist Name</p>
+        <button>Play</button>
+      </div>
+      <!-- Album 3 -->
+      <div class="album">
+        <img src="https://via.placeholder.com/200" alt="Album Cover">
+        <h3>Album Title</h3>
+        <p>Artist Name</p>
+        <button>Play</button>
+      </div>
+    </div>
+  </div>
+
+</body>
 </html>
