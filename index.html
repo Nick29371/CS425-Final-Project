@@ -8,7 +8,6 @@
 </head>
 <body>
 
-  <!-- Navigation Bar -->
   <div class="navbar">
     <div class="logo">
       <a href="#">Apple Music</a>
@@ -21,14 +20,12 @@
     </div>
   </div>
 
-  <!-- Hero Section -->
   <div class="hero">
     <h1>Welcome to Apple Music</h1>
     <p>Stream 100 million songs ad-free, anytime.</p>
     <button id="createAccountBtn">Create an Account</button>
   </div>
-
-  <!-- Modal -->
+  <img src="homepage_photo.jpg" alt="Girl with headphones">
   <div class="modal" id="accountModal">
     <div class="modal-content">
       <h2>Create an Account</h2>
@@ -84,8 +81,6 @@
   <script>
   function runPythonScript(func) {
       var xhr = new XMLHttpRequest();
-      xhr.open("GET", "test.py", true);
-      xhr.setRequestHeader({"Access-Control-Allow-Origin", "*"})
       xhr.open("GET", "test.py ${func}", true);
       xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
       xhr.send();
