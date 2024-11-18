@@ -9,12 +9,6 @@ body {
       background-color: #f9f9f9;
       color: #000;
 }
-
-footer {
-      text-align: center;
-      padding: 3px;
-      min-height: 50px;
-}
 .center {
   display: block;
   margin-left: auto;
@@ -27,6 +21,7 @@ footer {
 background: #1c1c1e;
 color: #fff;
 display: flex;
+position: fixed;
 justify-content: space-between;
 align-items: center;
 padding: 10px 20px;
