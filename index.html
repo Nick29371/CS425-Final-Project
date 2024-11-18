@@ -218,8 +218,17 @@
       </form>
     </div>
   </div>
-
   <script>
+  function runPythonScript(func) {
+      var xhr = new XMLHttpRequest();
+      xhr.open("GET", "test.py", true);
+      xhr.setRequestHeader({"Access-Control-Allow-Origin", "*"})
+      xhr.open("GET", "test.py ${func}", true);
+      xhr.setRequestHeader("Access-Control-Allow-Origin", "*")
+      xhr.send();
+    }    
+    </script>
+    <script>
     // Open Modal
     const createAccountBtn = document.getElementById('createAccountBtn');
     const accountModal = document.getElementById('accountModal');
