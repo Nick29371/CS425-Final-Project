@@ -25,27 +25,17 @@
     <a href="new_accnt.html" id="createAccountBtn">Create an Account></a>
   </div>
 
-  <!-- Options Section -->
-  <div class="options-section">
-    <h2>What are you looking for?</h2>
-    <div class="options-grid">
-      <div class="option-card" onclick="handleOptionClick('Songs')">
-        <h3>Songs</h3>
-      </div>
-      <div class="option-card" onclick="handleOptionClick('Albums')">
-        <h3>Albums</h3>
-      </div>
-      <div class="option-card" onclick="handleOptionClick('Artists')">
-        <h3>Artists</h3>
-      </div>
-      <div class="option-card" onclick="handleOptionClick('Playlists')">
-        <h3>Playlists</h3>
-      </div>
-      <div class="option-card" onclick="handleOptionClick('Genres')">
-        <h3>Genres</h3>
-      </div>
-    </div>
+  <!-- Options Section --><div class="options-section">
+  <h2>What are you looking for?</h2>
+  <div class="options-grid">
+    <button class="option-button" onclick="handleOptionClick('Songs')">Songs</button>
+    <button class="option-button" onclick="handleOptionClick('Albums')">Albums</button>
+    <button class="option-button" onclick="handleOptionClick('Artists')">Artists</button>
+    <button class="option-button" onclick="handleOptionClick('Playlists')">Playlists</button>
+    <button class="option-button" onclick="handleOptionClick('Genres')">Genres</button>
   </div>
+</div>
+
 
   <!-- Dynamic Content Container -->
   <div id="dynamicContainer"></div>
