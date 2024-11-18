@@ -145,3 +145,34 @@ color: white;
 .form-actions .submit:hover {
 background: #ff375f;
 }
+
+.table-container {
+      margin: 20px auto;
+      max-width: 1200px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #ff2d55;
+      color: white;
+    }
+
+    .empty-message {
+      text-align: center;
+      margin-top: 20px;
+      font-style: italic;
+      color: #888;
