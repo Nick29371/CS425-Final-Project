@@ -190,4 +190,5 @@ background: #ff375f;
 
 .flexbar {
       display: flex;
+      flex-direction: row;
 }
