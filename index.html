@@ -25,32 +25,28 @@
     <a href="new_accnt.html" id="createAccountBtn">Create an Account></a>
   </div>
 
-  <!-- Options Section --><div class="options-section">
-<div class="options-section">
-  <h2>What are you looking for?</h2>
-  <div class="options-grid">
-    <a href="songs.html" class="option-button">Songs</a>
-    <a href="albums.html" class="option-button">Albums</a>
-    <a href="artists.html" class="option-button">Artists</a>
-    <a href="playlists.html" class="option-button">Playlists</a>
-    <a href="genres.html" class="option-button">Genres</a>
+  <!-- Options Section -->
+  <div class="options-section">
+    <h2>What are you looking for?</h2>
+    <div class="options-grid">
+      <div class="option-card" onclick="handleOptionClick('Songs')">
+        <h3>Songs</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Albums')">
+        <h3>Albums</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Artists')">
+        <h3>Artists</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Playlists')">
+        <h3>Playlists</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Genres')">
+        <h3>Genres</h3>
+      </div>
+    </div>
   </div>
-</div>
 
-
-<footer class="navbar">
-  <style>
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    background-color: white;
-    color: white;
-    text-align: center;
-  </style>
-  <p>Will Morrissey, Besnik Shuaipaj, Edilson Alberto, Hrideta Rimu</p>
-  <p>CS425</p>
-</footer>
   <!-- Dynamic Content Container -->
   <div id="dynamicContainer"></div>
 
