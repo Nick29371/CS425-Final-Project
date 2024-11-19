@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apple Music Database</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <div class="navbar">
+    <div class="logo">
+      <a href="index.html">Apple Music</a>
+    </div>
+    <div class="nav-links">
+      <a href="#" id="searchLink">Search</a>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <div class="hero">
+    <h1>Welcome to Apple Music</h1>
+    <p>Stream 100 million songs ad-free, anytime.</p>
+    <a href="new_accnt.html" id="createAccountBtn">Create an Account></a>
+  </div>
+
+  <!-- Options Section -->
+  <div class="options-section">
+    <h2>What are you looking for?</h2>
+    <div class="options-grid">
+      <div class="option-card" onclick="handleOptionClick('Songs')">
+        <h3>Songs</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Albums')">
+        <h3>Albums</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Artists')">
+        <h3>Artists</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Playlists')">
+        <h3>Playlists</h3>
+      </div>
+      <div class="option-card" onclick="handleOptionClick('Genres')">
+        <h3>Genres</h3>
+      </div>
+    </div>
+  </div>
+
+  <!-- Dynamic Content Container -->
+  <div id="dynamicContainer"></div>
+
+  <!-- External Scripts -->
+  <script src="searchForm.js"></script>
+</body>
+</html>
