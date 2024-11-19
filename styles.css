@@ -187,3 +187,7 @@ background: #ff375f;
       font-style: italic;
       color: #888;
     }
+
+.flexbar {
+      display: flex;
+}
